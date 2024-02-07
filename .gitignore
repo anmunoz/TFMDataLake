@@ -2,7 +2,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-D:/Archivos\ uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/
+src/main/scala/org/tfmupm/data/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
