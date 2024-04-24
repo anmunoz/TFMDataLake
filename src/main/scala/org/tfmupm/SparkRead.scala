@@ -17,7 +17,7 @@ object SparkRead {
       .getOrCreate()
 
     // Directorio raíz que se va a analizar para convertir los datos de los sensores en tablas Delta
-    val parentDirectory = new File("D:/Archivos uni/TFM/dataset/data/ADL_sequences")
+    val parentDirectory = new File("D:/Archivos_uni/TFM/dataset/data/ADL_sequences")
 
     // Comprobación de la existencia del directorio raíz
     if (parentDirectory.exists() && parentDirectory.isDirectory) {
@@ -46,7 +46,7 @@ object SparkRead {
               val gyroscopePath = s"${accion.getAbsolutePath}/*-gyroscope-*.csv"
 
               // Se define el directorio base para las tablas Delta
-              val baseDeltaDirectory = "D:/Archivos uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data"
+              val baseDeltaDirectory = "D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data"
 
               // Se definen los paths de los directorios de las tablas Delta para el aceletómetro y el giroscopio
               val pacienteectoryDeltaPath = s"$baseDeltaDirectory/$pacienteName/$accionName"

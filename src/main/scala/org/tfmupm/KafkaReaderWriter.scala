@@ -2,8 +2,8 @@ package org.tfmupm
 
 import org.apache.spark.sql.SparkSession
 import io.delta.tables._
-import org.apache.spark.sql.functions.{col, collect_list, expr, first, from_json, window}
-import org.apache.spark.sql.types.{StringType, StructField, StructType}
+import org.apache.spark.sql.functions.{coalesce, col, collect_list, expr, first, from_json, lit, window}
+import org.apache.spark.sql.types.{ArrayType, IntegerType, StringType, StructField, StructType}
 
 import java.io.File
 
@@ -25,8 +25,24 @@ object KafkaReaderWriter {
       .load()
 
     val schema1 = StructType(Seq(
-      StructField("regularexp", StringType),
-      StructField("http.multipart.name", StringType)
+      StructField("subject_id", StringType),
+      StructField("record_id", StringType),
+      StructField("name", StringType),
+      StructField("birth_year", IntegerType),
+      StructField("diagnosis", StringType),
+      StructField("gender", StringType),
+      StructField("dominant_hand", StringType),
+      StructField("record_added_on", StringType),
+      StructField("recorded_tasks", ArrayType(StructType(Seq(
+        StructField("accelerometer_filename", StringType),
+        StructField("gyroscope_filename", StringType),
+        StructField("accelerometer_values", StringType),
+        StructField("gyroscope_values", StringType),
+        StructField("task_id", StringType),
+        StructField("task_name", StringType),
+        StructField("trial", IntegerType),
+
+      ))))
     ))
 
     val json_df = df.selectExpr("cast(value as string) as value")
@@ -38,9 +54,8 @@ object KafkaReaderWriter {
       .writeStream
       .outputMode("append")
       .format("delta")
-      .option("checkpointLocation", "D:/Archivos uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/bronze-checkpoint")
-      .start("D:/Archivos uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/bronze")
-
+      .option("checkpointLocation", "D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/bronze-checkpoint")
+      .start("D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/bronze")
 
     val query = json_expanded_df
       .writeStream
@@ -48,7 +63,7 @@ object KafkaReaderWriter {
       .outputMode("append")
       .start()
 
-
     query.awaitTermination()
+
   }
 }
