@@ -1,9 +1,11 @@
 package org.tfmupm
+import org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema
 import org.apache.spark.sql.delta.DeltaTable
 
 import java.io.File
 import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 import org.apache.spark.sql.functions.first
+import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
 
 object BronzeToSilver {
   def main(args: Array[String]): Unit = {
@@ -24,17 +26,33 @@ object BronzeToSilver {
     val subjectTableRead = spark.read.format("delta").load("D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/SubjectsTable")
     //subjectTableRead.show()
     val basePath = "D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data"
-    
+
     // Función auxiliar encargada de convertir la fila a tabla
     def writeRowToDelta(row: org.apache.spark.sql.Row, tableDeltaPath: String): Unit = {
       // Crea el DataFrame a partir de la fila
       val schema = row.schema
       val rdd = spark.sparkContext.parallelize(Seq(row))
-      val df = spark.createDataFrame(rdd, schema)
+      val dfSubjects = spark.createDataFrame(rdd, schema)
+      dfSubjects.write.format("delta").mode("overwrite").save(tableDeltaPath)
 
-      // Escribe el DataFrame en formato Delta Lake
-      df.write.format("delta").mode("overwrite").save(tableDeltaPath)
-      df.show()
+      val recordedTasksArray = row.getAs[Seq[Row]]("recorded_tasks")
+
+      val schema2 = StructType(Seq(
+        StructField("accelerometer_filename", StringType, nullable = true),
+        StructField("gyroscope_filename", StringType, nullable = true),
+        StructField("accelerometer_values", StringType, nullable = true),
+        StructField("gyroscope_values", StringType, nullable = true),
+        StructField("task_id", StringType, nullable = true),
+        StructField("task_name", StringType, nullable = true),
+        StructField("trial", IntegerType, nullable = true)
+      ))
+      println(recordedTasksArray)
+      // Convertir el array en DataFrame
+      val rddTasks = spark.sparkContext.parallelize(recordedTasksArray)
+      val dfTasks = spark.createDataFrame(rddTasks, schema2)
+      dfTasks.printSchema()
+      // Guardar el DataFrame en una tabla Delta
+      dfTasks.write.format("delta").mode("overwrite").save(s"$tableDeltaPath/tasks")
     }
 
     // Por cada fila que tenga la tabla bronze, crea una tabla de cada uno de los sujetos. Se guarda toda la información recibida por Nifi.

@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2df42432-3dec-47c3-81f6-b657e057bf21" name="Changes" comment="Created file to read from Kafka and bronze to silver table creator">
+    <list default="true" id="2df42432-3dec-47c3-81f6-b657e057bf21" name="Changes" comment="Modified silver table creator to create a table for each subject">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/org/tfmupm/BronzeToSilver.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/org/tfmupm/BronzeToSilver.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/org/tfmupm/KafkaReaderWriter.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/org/tfmupm/KafkaReaderWriter.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/org/tfmupm/SparkRead.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/org/tfmupm/SparkRead.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +51,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Scala&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.BronzeToSilver">
+  <component name="RunManager" selected="Application.ambulatoryReader">
     <configuration name="BronzeToSilver" type="Application" factoryName="Application">
       <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
       <option name="MAIN_CLASS_NAME" value="org.tfmupm.BronzeToSilver" />
@@ -156,7 +154,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708521507331</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Modified silver table creator to create a table for each subject">
+      <option name="closed" value="true" />
+      <created>1713974574418</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1713974574418</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -174,6 +180,17 @@
     <MESSAGE value="First version" />
     <MESSAGE value="Changed grammar" />
     <MESSAGE value="Created file to read from Kafka and bronze to silver table creator" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created file to read from Kafka and bronze to silver table creator" />
+    <MESSAGE value="Modified silver table creator to create a table for each subject" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modified silver table creator to create a table for each subject" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.ClassCastException" package="java.lang" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
