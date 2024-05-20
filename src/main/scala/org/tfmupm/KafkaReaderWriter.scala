@@ -18,13 +18,19 @@ object KafkaReaderWriter {
         "org.apache.spark.sql.delta.catalog.DeltaCatalog")
       .getOrCreate()
 
-    val df = spark.readStream
+    val dfAmbulatory = spark.readStream
       .format("kafka")
       .option("kafka.bootstrap.servers", "localhost:9092")
       .option("subscribe", "nifitopic")
       .load()
 
-    val schema1 = StructType(Seq(
+    val dfContinuous = spark.readStream
+      .format("kafka")
+      .option("kafka.bootstrap.servers", "localhost:9092")
+      .option("subscribe", "nificontinuous")
+      .load()
+
+    val schemaAmbulatory = StructType(Seq(
       StructField("subject_id", StringType),
       StructField("record_id", StringType),
       StructField("name", StringType),
@@ -45,25 +51,59 @@ object KafkaReaderWriter {
       ))))
     ))
 
-    val json_df = df.selectExpr("cast(value as string) as value")
-    val json_expanded_df = json_df
-      .withColumn("value", from_json(col("value"), schema1))
+    val schemaContinuous = StructType(Seq(
+      StructField("subject_id", StringType),
+      StructField("name", StringType),
+      StructField("birth_year", IntegerType),
+      StructField("diagnosis", StringType),
+      StructField("gender", StringType),
+      StructField("dominant_hand", StringType),
+      StructField("record_added_on", StringType),
+      StructField("recorded_tasks", ArrayType(StructType(Seq(
+        StructField("task_id", StringType),
+        StructField("task_name", StringType),
+        StructField("starts_at", StringType),
+        StructField("ends_at", StringType)
+      ))))
+    ))
+
+
+    val json_df_ambulatory = dfAmbulatory.selectExpr("cast(value as string) as value")
+    val json_expanded_df_ambulatory = json_df_ambulatory
+      .withColumn("value", from_json(col("value"), schemaAmbulatory))
       .select("value.*")
 
-    json_expanded_df
+    val json_df_continuous = dfContinuous.selectExpr("cast(value as string) as value")
+    val json_expanded_df_continuous = json_df_continuous
+      .withColumn("value", from_json(col("value"), schemaContinuous))
+      .select("value.*")
+
+    json_expanded_df_ambulatory
       .writeStream
       .outputMode("append")
       .format("delta")
-      .option("checkpointLocation", "D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/bronze-checkpoint")
-      .start("D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/bronze")
+      .option("checkpointLocation", "D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/bronze_ambulatory_checkpoint")
+      .start("D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/bronze_ambulatory")
 
-    val query = json_expanded_df
+    json_expanded_df_continuous
+      .writeStream
+      .outputMode("append")
+      .format("delta")
+      .option("checkpointLocation", "D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/bronze_continuous_checkpoint")
+      .start("D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/bronze_continuous")
+
+    val queryA = json_expanded_df_ambulatory
+      .writeStream
+      .format("console")
+      .outputMode("append")
+      .start()
+    val queryC = json_expanded_df_continuous
       .writeStream
       .format("console")
       .outputMode("append")
       .start()
 
-    query.awaitTermination()
-
+    queryA.awaitTermination()
+    queryC.awaitTermination()
   }
 }
