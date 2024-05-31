@@ -13,7 +13,7 @@ object BronzeToSilver {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
       .master("local[1]")
-      .appName("Reading from kafka topic")
+      .appName("Transforming from bronze to silver")
       .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
       .config(
         "spark.sql.catalog.spark_catalog",

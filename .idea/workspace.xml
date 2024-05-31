@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2df42432-3dec-47c3-81f6-b657e057bf21" name="Changes" comment="Modified silver table creator to create a table for each subject">
+    <list default="true" id="2df42432-3dec-47c3-81f6-b657e057bf21" name="Changes" comment="Added continuous records support">
+      <change afterPath="$PROJECT_DIR$/src/main/scala/org/tfmupm/ambulatoryReaderDocker.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/org/tfmupm/BronzeToSilver.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/org/tfmupm/BronzeToSilver.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/org/tfmupm/KafkaReaderWriter.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/org/tfmupm/KafkaReaderWriter.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/org/tfmupm/ambulatoryReader.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/org/tfmupm/ambulatoryReader.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,26 +33,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.BronzeToSilver.executor&quot;: &quot;Run&quot;,
-    &quot;Application.KafkaReaderWriter.executor&quot;: &quot;Run&quot;,
-    &quot;Application.SparkRead.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Tester.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ambulatoryReader.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Archivos_uni/TFM/TFMDataLake&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Scala&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.BronzeToSilver.executor": "Run",
+    "Application.KafkaReaderWriter.executor": "Run",
+    "Application.SparkRead.executor": "Run",
+    "Application.Tester.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "Application.ambulatoryReader.executor": "Run",
+    "Application.ambulatoryReaderDocker.executor": "Run",
+    "Docker.Dockerfile.executor": "Run",
+    "Docker.tfmupm/Dockerfile.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Archivos_uni/TFM/TFMDataLake",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Scala"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Archivos_uni\TFM\TFMDataLake" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.tfmupm" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.ambulatoryReader">
     <configuration name="BronzeToSilver" type="Application" factoryName="Application">
       <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
@@ -98,13 +110,52 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ambulatoryReaderDocker" type="Application" factoryName="Application">
+      <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
+      <option name="MAIN_CLASS_NAME" value="org.tfmupm.ambulatoryReaderDocker" />
+      <module name="TFMDataLake" />
+      <option name="VM_PARAMETERS" value="--add-exports java.base/sun.nio.ch=ALL-UNNAMED" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="containerName" value="" />
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tfmupm/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="src/main/scala/org/tfmupm/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Application.ambulatoryReaderDocker" />
       <item itemvalue="Application.KafkaReaderWriter" />
       <item itemvalue="Application.ambulatoryReader" />
       <item itemvalue="Application.SparkRead" />
       <item itemvalue="Application.Tester" />
       <item itemvalue="Application.BronzeToSilver" />
+      <item itemvalue="Docker.Dockerfile" />
+      <item itemvalue="Docker.tfmupm/Dockerfile" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.Dockerfile" />
+        <item itemvalue="Docker.tfmupm/Dockerfile" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -171,7 +222,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714991799904</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added continuous records support">
+      <option name="closed" value="true" />
+      <created>1716198316018</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1716198316018</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -190,7 +249,8 @@
     <MESSAGE value="Changed grammar" />
     <MESSAGE value="Created file to read from Kafka and bronze to silver table creator" />
     <MESSAGE value="Modified silver table creator to create a table for each subject" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modified silver table creator to create a table for each subject" />
+    <MESSAGE value="Added continuous records support" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added continuous records support" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
