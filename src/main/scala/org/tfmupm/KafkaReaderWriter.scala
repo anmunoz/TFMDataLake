@@ -53,6 +53,7 @@ object KafkaReaderWriter {
 
     val schemaContinuous = StructType(Seq(
       StructField("subject_id", StringType),
+      StructField("record_id", StringType),
       StructField("name", StringType),
       StructField("birth_year", IntegerType),
       StructField("diagnosis", StringType),
