@@ -78,7 +78,6 @@ object KafkaReaderWriterDocker {
     val json_expanded_df_continuous = json_df_continuous
       .withColumn("value", from_json(col("value"), schemaContinuous))
       .select("value.*")
-    val basepath = "/home/datalake/classes/org/tfmupm/data"
 
     json_expanded_df_ambulatory
       .writeStream

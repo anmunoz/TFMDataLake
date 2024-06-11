@@ -58,16 +58,27 @@ services:
       - D:/Archivos_uni/TFM/TFMDataLake/target:/home/datalake
   nifi:
     image: apache/nifi:latest
+    environment:
+      - NIFI_WEB_HTTPS_PORT= 8080
+      - NIFI_WEB_HTTPS_HOST= 0.0.0.0
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
     ports:
-      - "8081:8080"
+      - '2181:2181'
+
   kafka:
     image: confluentinc/cp-kafka:latest
     ports:
       - "9092:9092"
     environment:
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_CREATE_TOPICS: "nifitopic:1:1,nificontinuous:1:1"
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      - KAFKA_CREATE_TOPICS="nifitopic:1:1,nificontinuous:1:1"
+    depends_on:
+      - zookeeper
 
   jupyter:
     image: jupyter/base-notebook:latest
