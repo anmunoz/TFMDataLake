@@ -18,7 +18,10 @@ object SparkRead {
         "org.apache.spark.sql.delta.catalog.DeltaCatalog")
       .getOrCreate()
 
-    val baseDeltaDirectory = "D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/historicaldb"
+    val baseDeltaDirectoryADL = "D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/historicaldb"
+    val baseDeltaDirectoryHospital = "D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/hospital_sequences"
+    val baseDeltaDirectoryLab = "D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/lab_sequences"
+
     def processDirectory(dir: File, baseInputPath: String, baseOutputPath: String): Unit = {
       val files = dir.listFiles()
       if (files != null) {
@@ -42,8 +45,12 @@ object SparkRead {
     }
 
 
-        val baseInputDirectory = "D:/Archivos_uni/TFM/dataset/data/ADL_Sequences"
-    processDirectory(new File(baseInputDirectory), baseInputDirectory, baseDeltaDirectory)
+    val baseInputDirectoryADL = "D:/Archivos_uni/TFM/dataset/data/ADL_Sequences"
+    val baseInputDirectoryHospital = "D:/Archivos_uni/TFM/dataset/data/hospital_sequences"
+    val baseInputDirectoryLab = "D:/Archivos_uni/TFM/dataset/data/lab_sequences"
+    // processDirectory(new File(baseInputDirectoryADL), baseInputDirectoryADL, baseDeltaDirectoryADL)
+    processDirectory(new File(baseInputDirectoryHospital), baseInputDirectoryHospital, baseDeltaDirectoryHospital)
+    // processDirectory(new File(baseInputDirectoryLab), baseInputDirectoryLab, baseDeltaDirectoryLab)
 
     val endTime = System.nanoTime()
     val duration = endTime - startTime
