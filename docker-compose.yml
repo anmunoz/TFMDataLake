@@ -48,7 +48,7 @@ services:
       - D:/Archivos_uni/TFM/dataset/data:/data
   spark-submit-kafkareaderwriter:
     image: bitnami/spark:3.0.1
-    command: /opt/bitnami/spark/bin/spark-submit --class org.tfmupm.KafkaReaderWriterDocker /home/datalake/TFMDataLake-1.0-SNAPSHOT.jar
+    command: /opt/bitnami/spark/bin/spark-submit --class org.tfmupm.KafkaReaderWriterDocker --packages io.delta:delta-core_2.12:0.8.0,org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.1 /home/datalake/TFMDataLake-1.0-SNAPSHOT.jar
     volumes:
       - D:/Archivos_uni/TFM/TFMDataLake/target:/home/datalake
   spark-submit-tablereader:
