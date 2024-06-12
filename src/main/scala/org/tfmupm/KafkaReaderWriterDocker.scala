@@ -11,7 +11,7 @@ object KafkaReaderWriterDocker {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
       .master("local[1]")
-      .appName("Reading from kafka topic")
+      .appName("Reading from kafka topic in new folders")
       .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
       .config(
         "spark.sql.catalog.spark_catalog",
@@ -83,15 +83,15 @@ object KafkaReaderWriterDocker {
       .writeStream
       .outputMode("append")
       .format("delta")
-      .option("checkpointLocation", "/home/datalake/classes/org/tfmupm/data/bronze_ambulatory_checkpoint")
-      .start("/home/datalake/classes/org/tfmupm/data/bronze_ambulatory")
+      .option("checkpointLocation", "/home/datalake/data/bronze_ambulatory_checkpoint_docker")
+      .start("/home/datalake/data/bronze_ambulatory_docker")
 
     json_expanded_df_continuous
       .writeStream
       .outputMode("append")
       .format("delta")
-      .option("checkpointLocation", "/home/datalake/classes/org/tfmupm/data/bronze_continuous_checkpoint")
-      .start("/home/datalake/classes/org/tfmupm/data/bronze_continuous")
+      .option("checkpointLocation", "/home/datalake/data/bronze_continuous_checkpoint_docker")
+      .start("/home/datalake/data/bronze_continuous_docker")
 
     val queryA = json_expanded_df_ambulatory
       .writeStream
