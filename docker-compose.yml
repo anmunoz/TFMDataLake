@@ -58,6 +58,8 @@ services:
     volumes:
       - D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm:/home/datalake
       - D:/Archivos_uni/TFM/TFMDataLake/target:/home
+    depends_on:
+      - spark-submit-kafkareaderwriter
   nifi:
     image: apache/nifi:latest
     environment:
