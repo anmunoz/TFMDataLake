@@ -10,7 +10,7 @@ import java.io.File
 object KafkaReaderWriterDocker {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
-      .master("local[1]")
+      .master("spark://spark:7077")
       .appName("Reading from kafka topic in new folders")
       .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
       .config(

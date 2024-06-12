@@ -36,14 +36,14 @@ object ambulatoryReader {
     dfTableBronzeContinuous.show()
 
     print("Tabla sujetos")
-    dfSubjectsTable.show()
+    //dfSubjectsTable.show()
     print("Tabla de registros del sujeto Jaime")
-    dfSubjectJaimeRecords.show()
+    //dfSubjectJaimeRecords.show()
 
     print("Tabla tareas 1del sujeto Jaime")
-    dfSubjectJaimeTareas1.show()
+    //dfSubjectJaimeTareas1.show()
     print("Tabla tareas 2 del sujeto Jaime")
-    dfSubjectJaimeTareas2.show()
+    //dfSubjectJaimeTareas2.show()
     print("Tabla tareas 3 del sujeto Jaime")
     dfSubjectJaimeTareas3.show()
 

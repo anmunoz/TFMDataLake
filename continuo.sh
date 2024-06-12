@@ -8,9 +8,9 @@ curl -v -s -S -X POST http://127.0.0.1:5050 \
 Content-Disposition: form-data; name="continuous-record-body"
 
 {
-    "subject_id": "20092f73366bc5765cb958ff5e7a956355b62e96bdc1c7f436d03067fb557781",
+    "subject_id": "355b62e96bdc1c7f436d03067fb55778120092f73366bc5765cb958ff5e7a956",
     "record_id": "e29c75h9e07hh08c8b193hh2g3ghdcb0g8b193hffe2907hh08c8b1",
-    "name": "Sandra Gutierrez",
+    "name": "Perico Gonzalez",
     "birth_year": 1966,
     "diagnosis": "",
     "gender": "male",

@@ -52,6 +52,12 @@ services:
     volumes:
       - D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm:/home/datalake
       - D:/Archivos_uni/TFM/TFMDataLake/target:/home
+  spark-submit-bronzetosilver:
+    image: bitnami/spark:3.5
+    command: /opt/bitnami/spark/bin/spark-submit --class org.tfmupm.BronzeToSilverDocker --packages io.delta:delta-spark_2.12:3.1.0,org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0 --conf "spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension" --conf "spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog" /home/TFMDataLake-1.0-SNAPSHOT.jar
+    volumes:
+      - D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm:/home/datalake
+      - D:/Archivos_uni/TFM/TFMDataLake/target:/home
   nifi:
     image: apache/nifi:latest
     environment:

@@ -7,10 +7,10 @@ curl -v -s -S -X POST http://127.0.0.1:5050/ambulatory \
 Content-Disposition: form-data; name="ambulatory-record-body"
 
 {
-    "subject_id": "ee9621c7f436d03067ff73366bc5765c7a95635b5577815b629bdc200958ff5b",
+    "subject_id": "5c7a95635b5577815b629bdc200958ff5bee9621c7f436d03067ff73366bc576",
     "record_id": "d947813bb44ad86i0f1896i983h0d5i637igf3ii19di3h4ihdcb1h9c2a44d846",
-    "name": "Paciente Especial",
-    "birth_year": 1933,
+    "name": "Leopoldo Panero",
+    "birth_year": 1945,
     "diagnosis": "",
     "gender": "male",
     "dominant_hand": "left",

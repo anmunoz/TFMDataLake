@@ -7,7 +7,7 @@ import io.delta.tables._
 object ambulatoryReaderDocker {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
-      .master("local[1]")
+      .master("spark://spark:7077")
       .appName("Reading from tables using Docker")
       .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
       .config(
