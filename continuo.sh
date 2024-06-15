@@ -8,10 +8,10 @@ curl -v -s -S -X POST http://127.0.0.1:5050 \
 Content-Disposition: form-data; name="continuous-record-body"
 
 {
-    "subject_id": "355b62e96bdc1c7f436d03067fb55778120092f73366bc5765cb958ff5e7a956",
-    "record_id": "e29c75h9e07hh08c8b193hh2g3ghdcb0g8b193hffe2907hh08c8b1",
-    "name": "Perico Gonzalez",
-    "birth_year": 1966,
+    "subject_id": "5be5c7a95635b5577815b629bdc200958ffe9621c7f436d03067ff73366bc576",
+    "record_id": "e07hh08c8b193hh2g3ghde29c75h9cb0g8b193hffe2907hh08c8b1",
+    "name": "Pepe Fernandez",
+    "birth_year": 1985,
     "diagnosis": "",
     "gender": "male",
     "dominant_hand": "right",

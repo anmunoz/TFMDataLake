@@ -24,14 +24,6 @@ object BronzeToSilver {
     // Se borran los datos de la carpeta data que no son la carpeta bronze. Sirve para automatizar el proceso de limpieza de datos.
     val dataPath = "D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data"
 
-    if (Files.exists(Paths.get(dataPath))) {
-      val directory = new File(dataPath)
-      directory.listFiles().filter(_.isDirectory).filterNot(_.getName.startsWith("bronze")).foreach { folder =>
-        folder.listFiles().foreach(_.delete())
-        folder.delete()
-        println("Se han borrado las carpetas necesarias")
-      }
-    }
     // Se leen las tablas bronze que contiene todos los datos obtenidos en KafkaReaderWriter tanto de registros Ambulatory como Continuous
     val dfTableBronzeAmbulatory = spark.read.format("delta").load(s"$dataPath/bronze_ambulatory")
     val dfTableBronzeContinuous = spark.read.format("delta").load(s"$dataPath/bronze_continuous")
@@ -124,7 +116,7 @@ object BronzeToSilver {
           val taskDetailsDFCont = explodedDFCont.select("task.*")
 
           // Seleccionar solo las columnas deseadas
-          val selectedColumnsDFCont = taskDetailsDFCont.select("task_id", "task_name", "starts_at", "ends_at")
+          val selectedColumnsDFCont = taskDetailsDFCont.select("accelerometer_filename", "gyroscope_filename", "accelerometer_values", "gyroscope_values","task_id", "task_name", "starts_at", "ends_at")
 
           // Guardar el DataFrame resultante en una tabla
           selectedColumnsDFCont.write.format("delta").mode("overwrite").option("mergeSchema", "true").save(s"$dataPath/Subjects/$subjectId/Tasks/$recordId")

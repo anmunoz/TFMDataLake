@@ -35,6 +35,7 @@ object KafkaReaderWriter {
       StructField("record_id", StringType),
       StructField("name", StringType),
       StructField("birth_year", IntegerType),
+      StructField("illness_start_year", IntegerType),
       StructField("diagnosis", StringType),
       StructField("gender", StringType),
       StructField("dominant_hand", StringType),
@@ -47,7 +48,6 @@ object KafkaReaderWriter {
         StructField("task_id", StringType),
         StructField("task_name", StringType),
         StructField("trial", IntegerType),
-
       ))))
     ))
 
@@ -56,11 +56,16 @@ object KafkaReaderWriter {
       StructField("record_id", StringType),
       StructField("name", StringType),
       StructField("birth_year", IntegerType),
+      StructField("illness_start_year", IntegerType),
       StructField("diagnosis", StringType),
       StructField("gender", StringType),
       StructField("dominant_hand", StringType),
       StructField("record_added_on", StringType),
       StructField("recorded_tasks", ArrayType(StructType(Seq(
+        StructField("accelerometer_filename", StringType),
+        StructField("gyroscope_filename", StringType),
+        StructField("accelerometer_values", StringType),
+        StructField("gyroscope_values", StringType),
         StructField("task_id", StringType),
         StructField("task_name", StringType),
         StructField("starts_at", StringType),

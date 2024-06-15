@@ -7,12 +7,12 @@ curl -v -s -S -X POST http://127.0.0.1:5050/ambulatory \
 Content-Disposition: form-data; name="ambulatory-record-body"
 
 {
-    "subject_id": "5c7a95635b5577815b629bdc200958ff5bee9621c7f436d03067ff73366bc576",
+    "subject_id": "00958ff5bee9621c7f436d03067ff73365c7a95635b5577815b629bdc26bc576",
     "record_id": "d947813bb44ad86i0f1896i983h0d5i637igf3ii19di3h4ihdcb1h9c2a44d846",
-    "name": "Leopoldo Panero",
-    "birth_year": 1945,
+    "name": "Rosa Sanchez",
+    "birth_year": 1998,
     "diagnosis": "",
-    "gender": "male",
+    "gender": "female",
     "dominant_hand": "left",
     "record_added_on": 1709808482421,
     "recorded_tasks": [

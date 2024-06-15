@@ -20,32 +20,38 @@ object ambulatoryReader {
     val dfTableBronzeAmbulatory = spark.read.format("delta").load(s"$basepath/bronze_ambulatory")
     val dfTableBronzeContinuous = spark.read.format("delta").load(s"$basepath/bronze_continuous")
     val dfSubjectsTable = spark.read.format("delta").load(s"$basepath/SubjectsTable")
-//    val dfSubjectJaimeAmbu = spark.read.format("delta").load(s"$basepath/Subjects/9bdc1c7f436d03067f200958ff5e7a95635b5577815b62e962f73366bc5765cb/Ambulatorio")
-//    val dfSubjectJaimeCont = spark.read.format("delta").load(s"$basepath/Subjects/9bdc1c7f436d03067f200958ff5e7a95635b5577815b62e962f73366bc5765cb/Continuo")
-//    val dfSubjectIvanAmbu = spark.read.format("delta").load(s"$basepath/Subjects/c5765cb958ff5e7a95635b5577815b62e96bdc1c7f436d03067f20092f73366b/Ambulatorio")
-//    val dfSubjectIvanCont = spark.read.format("delta").load(s"$basepath/Subjects/c5765cb958ff5e7a95635b5577815b62e96bdc1c7f436d03067f20092f73366b/Continuo")
-    val dfSubjectJaimeTareas1 = spark.read.format("delta").load(s"$basepath/Subjects/9bdc1c7f436d03067f200958ff5e7a95635b5577815b62e962f73366bc5765cb/Tasks/3c735c836702aa3385h872g9c4h526hfe29c75h9e07hh08ch2g3ghdcb0g8b193")
-    val dfSubjectJaimeTareas2 = spark.read.format("delta").load(s"$basepath/Subjects/9bdc1c7f436d03067f200958ff5e7a95635b5577815b62e962f73366bc5765cb/Tasks/d947813bb4496i983h0d5i637igf3ad86i0f18ii19di3h4ihdcb1h9c2a44d846")
-    val dfSubjectJaimeTareas3 = spark.read.format("delta").load(s"$basepath/Subjects/9bdc1c7f436d03067f200958ff5e7a95635b5577815b62e962f73366bc5765cb/Tasks/hfe29c75h9e07hh08ch2g3ghdcb0g8b1933c735c836702aa3385h872g9c4h526")
+    val dfSubjectRecords = spark.read.format("delta").load(s"$basepath/Subjects/96bdc1c7f436d03067f20092f73366bc5765cb958ff5e7a95635b5577815b62e")
+    val dfSubjectAmbu = spark.read.format("delta").load(s"$basepath/Subjects/9bdc1c7f436d03067f200958ff5e7a95635b5577815b62e962f73366bc5765cb/Ambulatorio")
+    val dfSubjectTareasAmb = spark.read.format("delta").load(s"$basepath/Subjects/9bdc1c7f436d03067f200958ff5e7a95635b5577815b62e962f73366bc5765cb/Tasks/d947813bb4496i983h0d5i637igf3ad86i0f18ii19di3h4ihdcb1h9c2a44d846")
+    val dfSubjectTareasCont = spark.read.format("delta").load(s"$basepath/Subjects/c5765cb958ff5e7a95635b5577815b62e96bdc1c7f436d03067f20092f73366b/Tasks/h2g3ghdcb0g8b193hfe29c75h9e07hh08c8b193hfe2907hh08c8b1")
 
-    val dfSubjectJaimeRecords = spark.read.format("delta").load(s"$basepath/Subjects/9bdc1c7f436d03067f200958ff5e7a95635b5577815b62e962f73366bc5765cb/Records")
 
     print("Tabla ambulatory bronze")
+    print("\n")
     dfTableBronzeAmbulatory.show()
     print("Tabla continuous bronze")
+    print("\n")
     dfTableBronzeContinuous.show()
 
-    print("Tabla sujetos")
-    //dfSubjectsTable.show()
-    print("Tabla de registros del sujeto Jaime")
-    //dfSubjectJaimeRecords.show()
+    print("Tabla de los sujetos")
+    print("\n")
+    dfSubjectsTable.show()
 
-    print("Tabla tareas 1del sujeto Jaime")
-    //dfSubjectJaimeTareas1.show()
-    print("Tabla tareas 2 del sujeto Jaime")
-    //dfSubjectJaimeTareas2.show()
-    print("Tabla tareas 3 del sujeto Jaime")
-    dfSubjectJaimeTareas3.show()
+    print("Tabla de registros del sujeto 5c7a95635b5577815b629bdc200958ff5bee9621c7f436d03067ff73366bc576")
+    print("\n")
+    dfSubjectRecords.show()
+
+    print("Tabla de registros ambulatorios del sujeto 9bdc1c7f436d03067f200958ff5e7a95635b5577815b62e962f73366bc5765cb")
+    print("\n")
+    dfSubjectRecords.show()
+
+    print("Tabla tareas de registro ambulatorio del sujeto 9bdc1c7f436d03067f200958ff5e7a95635b5577815b62e962f73366bc5765cb")
+    print("\n")
+    dfSubjectAmbu.show()
+
+    print("Tabla tareas de registro continuo del sujeto c5765cb958ff5e7a95635b5577815b62e96bdc1c7f436d03067f20092f73366b")
+    print("\n")
+    dfSubjectTareasCont.show()
 
 
 
