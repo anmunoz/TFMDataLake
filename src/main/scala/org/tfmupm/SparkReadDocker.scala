@@ -1,26 +1,37 @@
 package org.tfmupm
 
 import org.apache.spark.sql.SparkSession
-import io.delta.tables._
 
 import java.io.File
 import java.nio.file.Paths
 
-object SparkRead {
+object SparkReadDocker {
   def main(args: Array[String]): Unit = {
     val startTime = System.nanoTime()
     val spark = SparkSession.builder()
-      .master("local[1]")
-      .appName("Reading from csv tables")
+      .master("spark://spark:7077")
+      .appName("Transforming csv tables to Delta tables using Docker")
       .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
       .config(
         "spark.sql.catalog.spark_catalog",
         "org.apache.spark.sql.delta.catalog.DeltaCatalog")
       .getOrCreate()
 
-    val baseDeltaDirectoryADL = "D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/adl_sequences"
-    val baseDeltaDirectoryHospital = "D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/hospital_sequences"
-    val baseDeltaDirectoryLab = "D:/Archivos_uni/TFM/TFMDataLake/src/main/scala/org/tfmupm/data/lab_sequences"
+    val originalPath = "/home/dataset" // Ruta donde se alojan los datos originales en formato CSV
+    val dataPath = "/home/datalake/data/" // Ruta donde se guardarán las tablas en formato Delta
+
+    val ADL_sequences_original = s"$originalPath/ADL_sequences"
+    val hospital_sequences_original = s"$originalPath/hospital_sequences"
+    val lab_sequences_original = s"$originalPath/lab_sequences"
+
+    val ADL_sequences_delta = s"$dataPath/adl_sequences"
+    val hospital_sequences_delta = s"$dataPath/hospital_sequences"
+    val lab_sequences_delta = s"$dataPath/lab_sequences"
+
+
+    // Se procesan los archivos CSV de las carpetas ADL_sequences, hospital_sequences y lab_sequences
+    // y se guardan en formato Delta en las carpetas adl_sequences, hospital_sequences y lab_sequences
+    // Para ello se itera por los directorios transormando los archivos CSV a tablas Delta
 
     def processDirectory(dir: File, baseInputPath: String, baseOutputPath: String): Unit = {
       val files = dir.listFiles()
@@ -44,12 +55,9 @@ object SparkRead {
       }
     }
 
-    val baseInputDirectoryADL = "D:/Archivos_uni/TFM/dataset/data/ADL_Sequences"
-    val baseInputDirectoryHospital = "D:/Archivos_uni/TFM/dataset/data/hospital_sequences"
-    val baseInputDirectoryLab = "D:/Archivos_uni/TFM/dataset/data/lab_sequences"
-    processDirectory(new File(baseInputDirectoryADL), baseInputDirectoryADL, baseDeltaDirectoryADL)
-    processDirectory(new File(baseInputDirectoryHospital), baseInputDirectoryHospital, baseDeltaDirectoryHospital)
-    processDirectory(new File(baseInputDirectoryLab), baseInputDirectoryLab, baseDeltaDirectoryLab)
+    processDirectory(new File(ADL_sequences_original), ADL_sequences_original, ADL_sequences_delta)
+    processDirectory(new File(hospital_sequences_original), hospital_sequences_original, hospital_sequences_delta)
+    processDirectory(new File(lab_sequences_original), lab_sequences_original, lab_sequences_delta)
 
     val endTime = System.nanoTime()
     val duration = endTime - startTime
