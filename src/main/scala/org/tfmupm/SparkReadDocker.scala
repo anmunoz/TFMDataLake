@@ -17,7 +17,7 @@ object SparkReadDocker {
         "org.apache.spark.sql.delta.catalog.DeltaCatalog")
       .getOrCreate()
 
-    val originalPath = "/home/dataset" // Ruta donde se alojan los datos originales en formato CSV
+    val originalPath = "/home/datalake/dataset" // Ruta donde se alojan los datos originales en formato CSV
     val dataPath = "/home/datalake/data/" // Ruta donde se guardarán las tablas en formato Delta
 
     val ADL_sequences_original = s"$originalPath/ADL_sequences"
