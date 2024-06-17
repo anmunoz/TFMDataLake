@@ -97,6 +97,7 @@ En este fichero se encuentran las importaciones necesarias para poder consultar 
 - Pandas: Para la visualización de los datos.
 - DeltaLake: Para la lectura de las tablas Delta.
 - Matplotlib: Para la generación de gráficos.
+- 
 ![Instalación e importación](/img/install_imports.png)
 
 Una vez se han instalado e importado las dependencias necesarias, para visualizar la tabla debe ejecutarse una celda con un contenido similar al siguiente:
@@ -110,5 +111,6 @@ También se pueden consultar los metadatos de las tablas
 df_bronze.history()
 ```
 ![Ejemplo de visualización](/img/metadatos.png)
+
 Gracias a Matplotlib también se pueden generar una serie de gráficos con los datos
 ![Ejemplo de visualización](/img/grafica_lab_sequences.png)
